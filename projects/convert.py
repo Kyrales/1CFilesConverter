@@ -207,12 +207,13 @@ def run_conversion(env_files, output_path=None):
         print_error("Переменная ScriptName не определена в .env файлах")
         return 1
     
-    # Скрипт должен находиться в той же папке, что и последний .env файл
-    last_env_dir = Path(env_files[-1]).parent
-    conversion_script = last_env_dir / script_name
+    # Скрипт должен находиться в папке projects/scripts относительно convert.py
+    script_dir = Path(__file__).parent / 'scripts'
+    conversion_script = script_dir / script_name
     
     if not conversion_script.exists():
         print_error(f"Скрипт {script_name} не найден: {conversion_script}")
+        print_error(f"Убедитесь, что скрипт находится в папке: {script_dir}")
         return 1
     
     print_info(f"Используется скрипт конвертации: {conversion_script}")
@@ -338,7 +339,7 @@ def run_conversion(env_files, output_path=None):
     try:
         result = subprocess.run(
             cmd,
-            cwd=str(last_env_dir),
+            cwd=str(script_dir),
             encoding='cp1251',
             errors='replace'
         )
