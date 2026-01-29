@@ -14,7 +14,7 @@ SETLOCAL ENABLEDELAYEDEXPANSION
 IF not defined V8_ENCODING set V8_ENCODING=65001
 chcp %V8_ENCODING% > nul
 
-set CONVERT_VERSION=UNKNOWN
+set CONVERT_VERSION="2.0"
 IF exist "%~dp0..\VERSION" FOR /F "usebackq tokens=* delims=" %%i IN ("%~dp0..\VERSION") DO set CONVERT_VERSION=%%i
 echo 1C files converter v.%CONVERT_VERSION%
 echo ======
